@@ -18,12 +18,9 @@ Vagrant.configure("2") do |config|
 
     end
     vms.vm.network "private_network", ip: "192.168.56.50"
-
-    vms.vm.provision "shell", inline: <<-SHELL
-     	sudo cp /vagrant/server.py /home/vagrant/
-     	sudo chmod +x /home/vagrant/server.py 
-    SHELL
-
+    
+	vms.vm.provision "shell", path: "script-server.sh"
+	
     end 
 
 #configuracion de la segunda vm "Cliente"
@@ -37,11 +34,8 @@ Vagrant.configure("2") do |config|
 
     end
     vmc.vm.network "private_network", ip: "192.168.56.100"
-
-    vmc.vm.provision "shell", inline: <<-SHELL
-     	sudo cp /vagrant/client.py /home/vagrant/
-     	sudo chmod +x /home/vagrant/client.py 
-    SHELL
+    
+    vmc.vm.provision "shell", path: "script-client.sh"
     
     end
 
